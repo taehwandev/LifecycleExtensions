@@ -22,7 +22,7 @@ It can be used via jcenter(), as follows
 [ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions/images/download.svg) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions/_latestVersion)
 
 ```
-compile 'tech.thdev.lifecycle.extensions:extensions:1.0.0-alpha'
+compile 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:1.0.0-alpha1
 ```
 
 ### Use with kotlin - Activity
