@@ -1,5 +1,16 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven-publish'
+
+
+ext {
+    libraryVersionCode = 1
+    libraryVersion = '1.0.0-alpha1'
+    libraryDescription = 'Android Architecture Components ViewModel simple factory inject. by thdev.tech'
+    releaseNote = 'CHANGELOG_LIFECYCLE_EXTENSIONS.md'
+}
 
 android {
     compileSdkVersion 26
@@ -34,3 +45,5 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$architectureComponentsVersion"
     testImplementation 'junit:junit:4.12'
 }
+
+apply from: rootProject.file('gradle/publish.gradle')
