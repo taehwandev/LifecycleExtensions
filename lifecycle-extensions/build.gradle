@@ -6,15 +6,15 @@ apply plugin: 'maven-publish'
 
 
 ext {
-    libraryVersionCode = 1
-    libraryVersion = '1.0.0-alpha1'
+    libraryVersionCode = 2
+    libraryVersion = '1.0.0-alpha2'
     libraryDescription = 'Android Architecture Components ViewModel simple factory inject. by thdev.tech'
     releaseNote = 'CHANGELOG_LIFECYCLE_EXTENSIONS.md'
 }
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    buildToolsVersion "26.0.1"
 
 
     defaultConfig {

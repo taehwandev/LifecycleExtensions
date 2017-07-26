@@ -13,22 +13,18 @@ import android.support.v4.app.FragmentActivity
  */
 @Suppress("UNCHECKED_CAST")
 fun <T : ViewModel> T.inject(fragment: Fragment): T {
-    val model = this
-    ViewModelProviders.of(fragment, object : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>?): T {
-            return model as T
-        }
-    }).get(this.javaClass)
+    ViewModelProviders.of(fragment, createViewModel(this)).get(this.javaClass)
     return this
 }
 
 @Suppress("UNCHECKED_CAST")
 fun <T : ViewModel> T.inject(fragmentActivity: FragmentActivity): T {
-    val model = this
-    ViewModelProviders.of(fragmentActivity, object : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>?): T {
-            return model as T
-        }
-    }).get(this.javaClass)
+    ViewModelProviders.of(fragmentActivity, createViewModel(this)).get(this.javaClass)
     return this
+}
+
+@Suppress("UNCHECKED_CAST")
+private fun <T : ViewModel> createViewModel(model: T) = object : ViewModelProvider.Factory {
+
+    override fun <T : ViewModel?> create(modelClass: Class<T>?): T = model as T
 }
