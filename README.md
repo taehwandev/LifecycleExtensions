@@ -25,13 +25,17 @@ It can be used via jcenter(), as follows
 compile 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:1.0.0-alpha2
 ```
 
+
 ## Blog
 
 한글 Post - [Android Architecture Components ViewModel을 간단하게 초기화 하려면?](http://thdev.tech/androiddev/2017/07/25/Android-Architecture-Components-ViewModel-Inject.html)
 
+
+## Use api
+
 ### Use with kotlin - Activity
 
-```
+```kotlin
 import android.arch.lifecycle.LifecycleActivity
 
 class MainActivity : LifecycleActivity() {
@@ -43,7 +47,7 @@ class MainActivity : LifecycleActivity() {
 
 ### Use with kotlin - Fragment
 
-```
+```kotlin
 import android.arch.lifecycle.LifecycleFragment
 
 class MainActivity : Fragment() {
@@ -52,6 +56,29 @@ class MainActivity : Fragment() {
     // ...
 }
 ```
+
+### Use with java - Activity
+
+```java
+public class Sample extends LifecycleActivity {
+
+    // ...
+    ViewModel viewModel = ExtensionsKt.inject(new ViewModel(...), this);
+    // ...
+}
+```
+
+### Use with java - Fragment
+
+```java
+public class Sample extends LifecycleFragment {
+
+    // ...
+    ViewModel viewModel = ExtensionsKt.inject(new ViewModel(...), this);
+    // ...
+}
+```
+
 
 ## Use Library version
 
