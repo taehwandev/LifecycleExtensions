@@ -22,6 +22,7 @@ It can be used via jcenter(), as follows
 [ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions/images/download.svg) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions/_latestVersion)
 
 ```
+compile 'android.arch.lifecycle:extensions:1.0.0-alpha5'
 compile 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:1.0.0-alpha2
 ```
 
