@@ -23,7 +23,7 @@ It can be used via jcenter(), as follows
 
 ```
 compile 'android.arch.lifecycle:extensions:1.0.0-alpha5'
-compile 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:1.0.0-alpha2
+compile 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:1.0.0-alpha3
 ```
 
 

@@ -1,5 +1,9 @@
 ## Change Log
 
+### Version 1.0.0-alpha3 (2017-07-27)
+
+- Fixed syntax.
+
 ### Version 1.0.0-alpha2 (2017-07-26)
 
 - Update buildToolsVersion(26.0.1)
