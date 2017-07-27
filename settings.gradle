@@ -1,1 +1,1 @@
-include ':app', ':lifecycle-extensions'
+include ':sample', ':lifecycle-extensions'
