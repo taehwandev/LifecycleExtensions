@@ -6,8 +6,8 @@ apply plugin: 'maven-publish'
 
 
 ext {
-    libraryVersionCode = 2
-    libraryVersion = '1.0.0-alpha2'
+    libraryVersionCode = 3
+    libraryVersion = '1.0.0-alpha3'
     libraryDescription = 'Android Architecture Components ViewModel simple factory inject. by thdev.tech'
     releaseNote = 'CHANGELOG_LIFECYCLE_EXTENSIONS.md'
 }
@@ -20,8 +20,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode libraryVersionCode
+        versionName libraryVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

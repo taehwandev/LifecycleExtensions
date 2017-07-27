@@ -12,16 +12,12 @@ import android.support.v4.app.FragmentActivity
  * Android lifecycle ViewModel Inject.
  */
 @Suppress("UNCHECKED_CAST")
-fun <T : ViewModel> T.inject(fragment: Fragment): T {
-    ViewModelProviders.of(fragment, createViewModel(this)).get(this.javaClass)
-    return this
-}
+fun <T : ViewModel> T.inject(fragment: Fragment): T
+        = ViewModelProviders.of(fragment, createViewModel(this)).get(this.javaClass)
 
 @Suppress("UNCHECKED_CAST")
-fun <T : ViewModel> T.inject(fragmentActivity: FragmentActivity): T {
-    ViewModelProviders.of(fragmentActivity, createViewModel(this)).get(this.javaClass)
-    return this
-}
+fun <T : ViewModel> T.inject(fragmentActivity: FragmentActivity): T
+        = ViewModelProviders.of(fragmentActivity, createViewModel(this)).get(this.javaClass)
 
 @Suppress("UNCHECKED_CAST")
 private fun <T : ViewModel> createViewModel(model: T) = object : ViewModelProvider.Factory {
