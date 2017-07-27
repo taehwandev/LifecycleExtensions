@@ -1,4 +1,4 @@
-package tech.thdev.lifecycleextensions
+package tech.thdev.lifecycle.sample.photo
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

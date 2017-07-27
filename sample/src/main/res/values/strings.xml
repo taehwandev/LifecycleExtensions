@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Lifecycle Extensions</string>
+
+    <string name="title_search">Search</string>
+    <string name="title_like">Like</string>
 </resources>
