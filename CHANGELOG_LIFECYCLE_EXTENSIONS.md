@@ -1,8 +1,16 @@
 ## Change Log
 
+### Version 1.1.0 (2018-06-05)
+
+- Update android new package. androidx
+- Update lifecycle library.
+- Android appcompat version 1.0.0-alpha1
+
+
 ### Version 1.0.0-alpha3 (2017-07-27)
 
 - Fixed syntax.
+
 
 ### Version 1.0.0-alpha2 (2017-07-26)
 
