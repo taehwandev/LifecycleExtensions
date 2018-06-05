@@ -22,8 +22,10 @@ It can be used via jcenter(), as follows
 [ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions/images/download.svg) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions/_latestVersion)
 
 ```
-compile 'android.arch.lifecycle:extensions:1.0.0-alpha5'
-compile 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:1.0.0-alpha3
+implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.41"
+implementation "androidx.appcompat:appcompat:1.0.0-alpha1"
+implementation "androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1"
+implementation 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:1.1.0'
 ```
 
 
@@ -83,15 +85,15 @@ public class Sample extends LifecycleFragment {
 
 ## Use Library version
 
-- Kotlin version : 1.1.3-2
-- Android Architecture Components : 1.0.0-alpha5
-- support libraryVersion : 26.0.0-beta2
+- Kotlin version : 1.2.41
+- AndroidX lifecycle-extensions : 2.0.0-alpha1
+- AndroidX appcompat libraryVersion : 1.0.0-alpha1
 
 
 ## License
 
 ```
-Copyright 2017 Tae-hwan
+Copyright 2018 Tae-hwan
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
