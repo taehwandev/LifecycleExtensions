@@ -25,7 +25,7 @@ It can be used via jcenter(), as follows
 implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.41"
 implementation "androidx.appcompat:appcompat:1.0.0-alpha1"
 implementation "androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1"
-implementation 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:1.1.0'
+implementation 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:1.1.1'
 ```
 
 
