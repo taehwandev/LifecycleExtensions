@@ -1,15 +1,37 @@
 ## Change Log
 
+### Version 2.1.0-beta01 (2018-08-03)
+
+- Add lazyInject
+
+    ```
+    private val viewModel: YourClassViewModel by /* activity or fragment default this */.lazyInject(/* customKey */) {
+        YourClassViewModel().apply {
+            // More ViewModel init.
+        }
+    }
+    ```
+
+- Change initialized
+
+    ```
+    val viewModel = /* activity or fragment default this */.inject {
+        YourClassViewModel().apply {
+            // More ViewModel init.
+        }
+    }
+    ```
+
 ### Version 2.0.0-beta01 (2018-08-03)
 
 - Version update.
 - Change initialized in lifecycle extensions.
 
     ```
-    MainViewModel::class.java.inject(this) {
+    YourClassViewModel::class.java.inject(this) {
         // Your class inject.
 
-        MainViewModel().apply {
+        YourClassViewModel().apply {
             // ViewModel init
         }
     }

@@ -13,19 +13,20 @@ import tech.thdev.lifecycleextensions.view.home.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
 
-    private val homeViewModel: HomeViewModel by lazy {
-        HomeViewModel::class.java.inject(this) {
-            HomeViewModel()
-        }
-    }
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_home, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        homeViewModel.updateButton = { count ->
-            Snackbar.make(fab_plus_one, "Plus one $count", Snackbar.LENGTH_SHORT).show()
+
+        homeViewModel = requireActivity().inject {
+            HomeViewModel()
+        }.apply {
+            updateButton = { count ->
+                Snackbar.make(fab_plus_one, "Plus one $count", Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         fab_plus_one.setOnClickListener {
