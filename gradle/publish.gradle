@@ -150,7 +150,7 @@ afterEvaluate {
         publications = publicationNames
 
         publish = true //[Default: false] Whether version should be auto published after an upload
-        override = false
+        override = true
 
         pkg {
             repo = repositoryName
