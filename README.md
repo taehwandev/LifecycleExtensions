@@ -19,7 +19,7 @@ ViewModelProviders.of(this, object : ViewModelProvider.Factory {
 
 It can be used via jcenter(), as follows
 
-[ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions/images/download.svg) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions/images/download.svg?version=1.2.0) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions/1.2.0/link)
 
 ```
 def last_lifecycle_version = "1.1.1"
