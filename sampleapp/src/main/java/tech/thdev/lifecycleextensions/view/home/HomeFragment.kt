@@ -22,14 +22,11 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         homeViewModel = requireActivity().inject {
-            HomeViewModel().apply {
-                // ...
+            HomeViewModel()
+        }.apply {
+            updateButton = { count ->
+                Snackbar.make(fab_plus_one, "Plus one $count", Snackbar.LENGTH_SHORT).show()
             }
-        }
-
-
-        homeViewModel.updateButton = { count ->
-            Snackbar.make(fab_plus_one, "Plus one $count", Snackbar.LENGTH_SHORT).show()
         }
 
         fab_plus_one.setOnClickListener {

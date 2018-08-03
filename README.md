@@ -46,9 +46,12 @@ class MainActivity : AppCompatActivity() {
 
     private val yourViewModel: YourViewModel by lazyInject(/* @Option customKey = "custom key" */) {
         // create Your ViewModel
-        YourViewModel(..., ..., ...).apply {
-            // Maybe init your lateinit?
-        }
+        YourViewModel(..., ..., ...)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+       // Maybe init view model
+       yourViewModel ...
     }
 }
 ```
@@ -60,9 +63,14 @@ class MainFragment : Fragment() {
 
     private val yourViewModel: YourViewModel by lazyInject(/* @Option customKey = "custom key" */) {
         // create Your ViewModel
-        YourViewModel(..., ..., ...).apply {
-            // Maybe init your lateinit?
-        }
+        YourViewModel(..., ..., ...)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        // Maybe init view model
+        yourViewModel ...
     }
 }
 
@@ -71,9 +79,14 @@ class MainFragment : Fragment() {
 
     private val yourViewModel: YourViewModel by lazyInject(isActivity = true /* @Option , customKey = "custom key" */) {
         // create Your ViewModel
-        YourViewModel(..., ..., ...).apply {
-            // Maybe init your lateinit?
-        }
+        YourViewModel(..., ..., ...)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        // Maybe init view model
+        yourViewModel ...
     }
 }
 ```
@@ -94,9 +107,9 @@ class MainActivity : AppCompatActivity() {
         // ...
         yourViewModel = inject(/* @Option customKey = "custom key" */) {
             // create Your ViewModel
-            YourViewModel(..., ..., ...).apply {
-                // Maybe init view model
-            }
+            YourViewModel(..., ..., ...)
+        }.run {
+            // Maybe init view model
         }
     }
 }
@@ -114,9 +127,9 @@ class MainFragment : Fragment() {
 
         yourViewModel = inject(/* @Option customKey = "custom key" */) {
             // create Your ViewModel
-            YourViewModel(..., ..., ...).apply {
-                // Maybe init view model
-            }
+            YourViewModel(..., ..., ...)
+        }.run {
+            // Maybe init view model
         }
     }
 }
@@ -131,9 +144,9 @@ class MainFragment : Fragment() {
 
         yourViewModel = requireActivity().inject(/* @Option customKey = "custom key" */) {
             // create Your ViewModel
-            YourViewModel(..., ..., ...).apply {
-                // Maybe init view model
-            }
+            YourViewModel(..., ..., ...)
+        }.run {
+            // Maybe init view model
         }
     }
 }
