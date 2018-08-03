@@ -51,6 +51,8 @@ publishing.publications {
         def baseVariantArtifactId = flavored ? variant.flavorName.replace('_', '-') : project.name
         def variantArtifactId = "$baseVariantArtifactId"
 
+        println variantArtifactId
+
         /**
          * If the javadoc destinationDir wasn't changed per flavor, the libraryVariants would
          * overwrite the javaDoc as all variants would write in the same directory
@@ -93,7 +95,8 @@ publishing.publications {
             classifier = 'sources'
         }
 
-        def publicationName = "lifecycleExtensions${variant.name.capitalize()}"
+        def publicationName = "LifecycleExtensions${variant.name.capitalize()}"
+        println publicationName
         publicationNames.add(publicationName)
 
         "$publicationName"(MavenPublication) {
@@ -150,7 +153,7 @@ afterEvaluate {
         publications = publicationNames
 
         publish = true //[Default: false] Whether version should be auto published after an upload
-        override = true
+        override = false
 
         pkg {
             repo = repositoryName
