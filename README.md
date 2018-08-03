@@ -22,10 +22,10 @@ It can be used via jcenter(), as follows
 [ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions-legacy/images/download.svg?version=1.3.0) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions-legacy/1.3.0/link)
 
 ```
-implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.60"
-implementation "com.android.support:appcompat-v7:27.1.1"
+implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.60'
+implementation 'com.android.support:appcompat-v7:27.1.1'
 
-implementation "android.arch.lifecycle:extensions:1.1.1"
+implementation 'android.arch.lifecycle:extensions:1.1.1'
 implementation 'tech.thdev.lifecycle:lifecycle-extensions-legacy:1.3.0'
 ```
 
