@@ -22,17 +22,10 @@ It can be used via jcenter(), as follows
 [ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions/images/download.svg) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions/_latestVersion)
 
 ```
-implementation "androidx.appcompat:appcompat:$androidxSupportLibraryVersion"
-implementation "androidx.lifecycle:lifecycle-extensions:$androidxLifecycle"
-
-compile 'android.arch.lifecycle:extensions:1.0.0-alpha5'
-
-compile 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:1.0.0-alpha3
-
 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.60'
 implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
 implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
-implementation 'tech.thdev.lifecycle:lifecycle-extensions:2.0.0-beta01'
+implementation "tech.thdev.lifecycle:lifecycle-extensions:$latestVersion"
 ```
 
 
