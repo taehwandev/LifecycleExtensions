@@ -1,5 +1,10 @@
 ## Change Log
 
+### Version 2.1.1 (2018-08-04)
+
+- Just version change.
+
+
 ### Version 2.1.0-beta01 (2018-08-03)
 
 - Add lazyInject
@@ -22,6 +27,7 @@
     }
     ```
 
+
 ### Version 2.0.0-beta01 (2018-08-03)
 
 - Version update.
@@ -36,6 +42,7 @@
         }
     }
     ```
+
 
 ### Version 1.1.0 (2018-06-05)
 
