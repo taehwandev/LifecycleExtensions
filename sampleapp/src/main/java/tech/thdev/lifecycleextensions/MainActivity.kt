@@ -4,9 +4,14 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import tech.thdev.lifecycle.extensions.inject
+import tech.thdev.lifecycle.extensions.lazyInject
 import tech.thdev.lifecycleextensions.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private val lazyViewModel: MainViewModel by lazyInject {
+        MainViewModel()
+    }
 
     private lateinit var mainViewModel: MainViewModel
 
@@ -17,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         /**
          * ViewModel use.
          */
-        mainViewModel = MainViewModel::class.java.inject(this, customKey = "custom key") {
+        mainViewModel = inject {
             MainViewModel().apply {
                 updateButton = { count ->
                     tv_message.text = getString(R.string.message_text, count)

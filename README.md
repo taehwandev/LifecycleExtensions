@@ -26,7 +26,7 @@ implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.60"
 implementation "com.android.support:appcompat-v7:27.1.1"
 
 implementation "android.arch.lifecycle:extensions:1.1.1"
-implementation 'tech.thdev.lifecycle:lifecycle-extensions-legacy:1.2.0'
+implementation 'tech.thdev.lifecycle:lifecycle-extensions-legacy:1.3.0'
 ```
 
 
@@ -35,88 +35,183 @@ implementation 'tech.thdev.lifecycle:lifecycle-extensions-legacy:1.2.0'
 한글 Post - [Android Architecture Components ViewModel을 간단하게 초기화 하려면?](http://thdev.tech/androiddev/2017/07/25/Android-Architecture-Components-ViewModel-Inject.html)
 
 
-## Use api
 
-### How to use with kotlin - Activity
+## Use api - by lazy patten
+
+Use when using lazy initialization
+
+### Activity - Kotlin
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
-    // ...
-    val yourViewModel = YourViewModel::class.java.inject(this /* @option , customKey = "custom key" */) {
+
+    private val yourViewModel: YourViewModel by lazyInject(/* @Option customKey = "custom key" */) {
         // create Your ViewModel
-        YourViewModel(..., ..., ...).apply {
-            // Maybe init view model
-        }
+        YourViewModel(..., ..., ...)
     }
-    // ...
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+       // Maybe init view model
+       yourViewModel ...
+    }
 }
 ```
 
-### How to use with kotlin - Fragment
+### Fragment - Kotlin
 
 ```kotlin
 class MainFragment : Fragment() {
 
+    private val yourViewModel: YourViewModel by lazyInject(/* @Option customKey = "custom key" */) {
+        // create Your ViewModel
+        YourViewModel(..., ..., ...)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val viewModel = YourViewModel::class.java.inject(this /* @option , customKey = "custom key" */) {
+        // Maybe init view model
+        yourViewModel ...
+    }
+}
+
+// or Use Activity inject.
+class MainFragment : Fragment() {
+
+    private val yourViewModel: YourViewModel by lazyInject(isActivity = true /* @Option , customKey = "custom key" */) {
+        // create Your ViewModel
+        YourViewModel(..., ..., ...)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        // Maybe init view model
+        yourViewModel ...
+    }
+}
+```
+
+
+## Use api - by inject only kotlin.
+
+Used when initializing lateinit.
+
+### Activity - kotlin
+
+```kotlin
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var yourViewModel: YourViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        // ...
+        yourViewModel = inject(/* @Option customKey = "custom key" */) {
             // create Your ViewModel
-            YourViewModel().apply {
-                // Maybe init view model
-            }
+            YourViewModel(..., ..., ...)
+        }.run {
+            // Maybe init view model
+        }
+    }
+}
+```
+
+### Fragment - kotlin
+
+```kotlin
+class MainFragment : Fragment() {
+
+    private lateinit var yourViewModel: YourViewModel
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        yourViewModel = inject(/* @Option customKey = "custom key" */) {
+            // create Your ViewModel
+            YourViewModel(..., ..., ...)
+        }.run {
+            // Maybe init view model
         }
     }
 }
 
 // or Use Activity inject.
 class MainFragment : Fragment() {
+
+    private lateinit var yourViewModel: YourViewModel
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val viewModel = MainViewModel::class.java.inject(requireActivity() /* @option , customKey = "custom key" */) {
+        yourViewModel = requireActivity().inject(/* @Option customKey = "custom key" */) {
             // create Your ViewModel
-            MainViewModel(..., ..., ...).apply {
-                // Maybe init view model
-            }
+            YourViewModel(..., ..., ...)
+        }.run {
+            // Maybe init view model
         }
     }
 }
 ```
 
-### How to use with java - Activity
+## Use api - by inject only Java.
+
+Used when java
+
+### Activity - Java
 
 ```java
-public class Sample extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
+
+    private YourViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        YourViewModel yourViewModel = Extensions.inject(YourViewModel.class, this /* @option , customKey = "custom key" */, new Function0<YourViewModel>() {
+        viewModel = ViewModelExtensions.inject(YourViewModel.class, this /*, @Option "custom key" */, new Function0<YourViewModel>() {
             @Override
             public YourViewModel invoke() {
-                return new YourViewModel();
+                return new YourViewModel(..., ..., ...);
             }
         });
     }
 }
 ```
 
-### Use with java - Fragment
+### Fragment - Java
 
 ```java
 public class Sample extends Fragment {
+
+    private YourViewModel viewModel;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        YourViewModel yourViewModel = Extensions.inject(YourViewModel.class, requireActivity() /* @option , customKey = "custom key" */, new Function0<YourViewModel>() {
+        viewModel = ViewModelExtensions.inject(YourViewModel.class, this /*, @Option "custom key" */, new Function0<YourViewModel>() {
             @Override
             public YourViewModel invoke() {
-                return new YourViewModel();
+                return new YourViewModel(..., ..., ...);
+            }
+        });
+    }
+}
+
+
+// or Use Activity inject.
+public class Sample extends Fragment {
+
+    private YourViewModel viewModel;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        viewModel = ViewModelExtensions.inject(YourViewModel.class, requireActivity() /*, @Option "custom key" */, new Function0<YourViewModel>() {
+            @Override
+            public YourViewModel invoke() {
+                return new YourViewModel(..., ..., ...);
             }
         });
     }
