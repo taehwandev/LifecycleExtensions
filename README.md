@@ -44,14 +44,15 @@ Use when using lazy initialization
 ```kotlin
 class MainActivity : AppCompatActivity() {
 
-    private val yourViewModel: YourViewModel by lazyInject(/* @Option customKey = "custom key" */) {
+    private val yourViewModel: YourViewModel
+            by lazyInject(/* @Option customKey = "custom key" */) {
         // create Your ViewModel
         YourViewModel(..., ..., ...)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-       // Maybe init view model
-       yourViewModel ...
+        // Maybe init view model
+        yourViewModel ...
     }
 }
 ```
@@ -61,7 +62,8 @@ class MainActivity : AppCompatActivity() {
 ```kotlin
 class MainFragment : Fragment() {
 
-    private val yourViewModel: YourViewModel by lazyInject(/* @Option customKey = "custom key" */) {
+    private val yourViewModel: YourViewModel
+            by lazyInject(/* @Option customKey = "custom key" */) {
         // create Your ViewModel
         YourViewModel(..., ..., ...)
     }
@@ -77,7 +79,10 @@ class MainFragment : Fragment() {
 // or Use Activity inject.
 class MainFragment : Fragment() {
 
-    private val yourViewModel: YourViewModel by lazyInject(isActivity = true /* @Option , customKey = "custom key" */) {
+    private val yourViewModel: YourViewModel
+            by lazyInject(
+                    isActivity = true
+                    /* @Option , customKey = "custom key" */) {
         // create Your ViewModel
         YourViewModel(..., ..., ...)
     }
@@ -125,7 +130,8 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        yourViewModel = inject(/* @Option customKey = "custom key" */) {
+        yourViewModel = inject(
+                /* @Option customKey = "custom key" */) {
             // create Your ViewModel
             YourViewModel(..., ..., ...)
         }.run {
@@ -142,7 +148,8 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        yourViewModel = requireActivity().inject(/* @Option customKey = "custom key" */) {
+        yourViewModel = requireActivity().inject(
+                /* @Option customKey = "custom key" */) {
             // create Your ViewModel
             YourViewModel(..., ..., ...)
         }.run {
@@ -167,7 +174,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewModel = ViewModelExtensions.inject(YourViewModel.class, this /*, @Option "custom key" */, new Function0<YourViewModel>() {
+        viewModel = ViewModelExtensions.inject(
+                YourViewModel.class,
+                this /*, @Option "custom key" */,
+                new Function0<YourViewModel>() {
+
             @Override
             public YourViewModel invoke() {
                 return new YourViewModel(..., ..., ...);
@@ -188,7 +199,11 @@ public class Sample extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewModel = ViewModelExtensions.inject(YourViewModel.class, this /*, @Option "custom key" */, new Function0<YourViewModel>() {
+        viewModel = ViewModelExtensions.inject(
+                YourViewModel.class,
+                this /*, @Option "custom key" */,
+                new Function0<YourViewModel>() {
+
             @Override
             public YourViewModel invoke() {
                 return new YourViewModel(..., ..., ...);
@@ -207,7 +222,11 @@ public class Sample extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewModel = ViewModelExtensions.inject(YourViewModel.class, requireActivity() /*, @Option "custom key" */, new Function0<YourViewModel>() {
+        viewModel = ViewModelExtensions.inject(
+                YourViewModel.class,
+                requireActivity() /*, @Option "custom key" */,
+                new Function0<YourViewModel>() {
+
             @Override
             public YourViewModel invoke() {
                 return new YourViewModel(..., ..., ...);
