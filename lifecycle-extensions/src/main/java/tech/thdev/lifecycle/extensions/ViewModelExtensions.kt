@@ -1,0 +1,49 @@
+@file:Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
+
+package tech.thdev.lifecycle.extensions
+
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+
+
+/**
+ * Android lifecycle ViewModel Inject.
+ */
+inline fun <reified VIEW_MODEL : ViewModel> Fragment.inject(customKey: String = "", noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
+        ViewModelProviders.of(this, createViewModel(onCreateViewModel)).run {
+            if (customKey.isNotEmpty()) {
+                this.get(customKey, VIEW_MODEL::class.java)
+            } else {
+                this.get(VIEW_MODEL::class.java)
+            }
+        }
+
+inline fun <reified VIEW_MODEL : ViewModel> FragmentActivity.inject(customKey: String = "", noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
+        ViewModelProviders.of(this, createViewModel(onCreateViewModel)).run {
+            if (customKey.isNotEmpty()) {
+                this.get(customKey, VIEW_MODEL::class.java)
+            } else {
+                get(VIEW_MODEL::class.java)
+            }
+        }
+
+fun <VIEW_MODEL : ViewModel> createViewModel(onCreateViewModel: () -> VIEW_MODEL) = object : ViewModelProvider.Factory {
+
+    override fun <VIEW_MODEL : ViewModel?> create(modelClass: Class<VIEW_MODEL>): VIEW_MODEL {
+        if (ViewModel::class.java.isAssignableFrom(modelClass)) {
+            try {
+                return onCreateViewModel() as VIEW_MODEL
+            } catch (e: Exception) {
+                when (e) {
+                    is NoSuchMethodException, is IllegalAccessException, is InstantiationException ->
+                        throw RuntimeException("Cannot create an instance of $modelClass", e)
+                }
+            }
+        }
+
+        throw RuntimeException("Cannot create an instance of $modelClass")
+    }
+}

@@ -6,29 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_time.*
-import tech.thdev.lifecycle.extensions.inject
+import tech.thdev.lifecycle.extensions.lazyInject
 import tech.thdev.lifecycleextensions.R
 import tech.thdev.lifecycleextensions.view.time.viewmodel.TimeViewModel
 
 class TimeFragment : Fragment() {
 
-    private lateinit var timeViewModel: TimeViewModel
+    private val timeViewModel: TimeViewModel by requireActivity().lazyInject {
+        TimeViewModel().apply {
+            updateLoginTime = { time ->
+                if (!isDetached) {
+                    tv_past_time?.text = time
+                }
+            }
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_time, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        timeViewModel = TimeViewModel::class.java.inject(requireActivity()) {
-            TimeViewModel().apply {
-                updateLoginTime = { time ->
-                    if (!isDetached) {
-                        tv_past_time?.text = time
-                    }
-                }
-            }
-        }
 
         timeViewModel.startTime()
     }

@@ -12,7 +12,7 @@ class HomeViewModel : ViewModel() {
     private val tag = this::class.java.simpleName
 
     init {
-        Log.i(tag, "ViewModel init")
+        Log.e(tag, "ViewModel init")
     }
 
     fun clickButton() {
