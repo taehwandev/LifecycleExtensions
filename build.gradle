@@ -12,7 +12,7 @@ buildscript {
         repositoryName = 'thdev.tech'
         groupId = 'tech.thdev.lifecycle.extensions.legacy'
 
-        websiteUrl = 'https://github.com/taehwandev/LifecycleExtensions/blob/1.x-LifecycleExtensions'
+        websiteUrl = 'https://github.com/taehwandev/LifecycleExtensions/tree/1.x-LifecycleExtensions'
         gitHubRepoUrl = 'https://github.com/taehwandev/LifecycleExtensions.git'
 
         LABELS = ['aar', 'android', 'android lifecycle extensions legacy']
