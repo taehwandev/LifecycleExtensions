@@ -10,7 +10,7 @@ buildscript {
 
         // Bintray setting info
         repositoryName = 'thdev.tech'
-        groupId = 'tech.thdev.lifecycle.extensions.legacy'
+        groupId = 'tech.thdev.lifecycle'
 
         websiteUrl = 'https://github.com/taehwandev/LifecycleExtensions/tree/1.x-LifecycleExtensions'
         gitHubRepoUrl = 'https://github.com/taehwandev/LifecycleExtensions.git'
