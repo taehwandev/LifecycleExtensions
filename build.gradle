@@ -2,14 +2,18 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.2.41'
-        androidxSupportLibraryVersion = '1.0.0-alpha3'
-        androidxConstraintVersion = '1.1.0'
-        androidxLifecycle = '2.0.0-alpha1'
+        kotlin_version = '1.2.60'
+        // https://github.com/Kotlin/kotlinx.coroutines
+        coroutines_version = '0.24.0'
+
+        androidxSupportLibraryVersion = '1.0.0-beta01'
+        androidxConstraintVersion = '1.1.2'
+        meterialLibraryVersion = '1.0.0-beta01'
+        androidxLifecycle = '2.0.0-beta01'
 
         // Bintray setting info
         repositoryName = 'thdev.tech'
-        groupId = 'tech.thdev.lifecycle.extensions'
+        groupId = 'tech.thdev.lifecycle'
 
         websiteUrl = 'https://github.com/taehwandev/LifecycleExtensions'
         gitHubRepoUrl = 'https://github.com/taehwandev/LifecycleExtensions.git'
@@ -30,13 +34,13 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-alpha16'
+        classpath 'com.android.tools.build:gradle:3.2.0-beta05'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // https://github.com/dcendents/android-maven-gradle-plugin
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         // https://github.com/bintray/gradle-bintray-plugin
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

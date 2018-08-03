@@ -5,8 +5,8 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'maven-publish'
 
 ext {
-    libraryVersionCode = 5
-    libraryVersion = '1.1.1'
+    libraryVersionCode = 6
+    libraryVersion = '2.0.0-beta01'
     libraryDescription = 'Android Architecture Components ViewModel simple factory inject. by thdev.tech'
     releaseNote = 'CHANGELOG_LIFECYCLE_EXTENSIONS.md'
 }
@@ -15,7 +15,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode libraryVersionCode
         versionName libraryVersion

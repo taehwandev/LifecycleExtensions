@@ -1,5 +1,20 @@
 ## Change Log
 
+### Version 2.0.0-beta01 (2018-08-03)
+
+- Version update.
+- Change initialized in lifecycle extensions.
+
+    ```
+    MainViewModel::class.java.inject(this) {
+        // Your class inject.
+
+        MainViewModel().apply {
+            // ViewModel init
+        }
+    }
+    ```
+
 ### Version 1.1.1 (2018-06-07)
 
 - Support Android 28.(Android P)
