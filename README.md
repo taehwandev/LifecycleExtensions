@@ -22,9 +22,11 @@ It can be used via jcenter(), as follows
 [ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions/images/download.svg?version=1.2.0) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions/1.2.0/link)
 
 ```
-def last_lifecycle_version = "1.1.1"
-compile "android.arch.lifecycle:extensions:$last_lifecycle_version"
-compile "tech.thdev.lifecycle.extensions.legacy:android-lifecycle-extensions:1.2.0"
+implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.60"
+implementation "com.android.support:appcompat-v7:27.1.1"
+
+implementation "android.arch.lifecycle:extensions:1.1.1"
+implementation "tech.thdev.lifecycle.extensions.legacy:android-lifecycle-extensions:1.2.0"
 ```
 
 
