@@ -1,4 +1,5 @@
 @file:Suppress("UNCHECKED_CAST")
+@file:JvmName("Extensions")
 
 package tech.thdev.lifecycle.extensions
 
@@ -10,18 +11,40 @@ import androidx.lifecycle.ViewModelProviders
 
 
 /**
- * Created by taehwankwon on 7/24/17.
- *
  * Android lifecycle ViewModel Inject.
  */
-fun <T : ViewModel> T.inject(fragment: Fragment): T =
-        ViewModelProviders.of(fragment, createViewModel(this)).get(this.javaClass)
+fun <T : ViewModel> Class<T>.inject(fragment: Fragment, customKey: String = "", onCreateViewModel: () -> T): T =
+        ViewModelProviders.of(fragment, createViewModel(onCreateViewModel)).run {
+            if (customKey.isNotEmpty()) {
+                this.get(customKey, this@inject)
+            } else {
+                this.get(this@inject)
+            }
+        }
 
-fun <T : ViewModel> T.inject(fragmentActivity: FragmentActivity): T =
-        ViewModelProviders.of(fragmentActivity, createViewModel(this)).get(this.javaClass)
+fun <T : ViewModel> Class<T>.inject(fragmentActivity: FragmentActivity, customKey: String = "", onCreateViewModel: () -> T): T =
+        ViewModelProviders.of(fragmentActivity, createViewModel(onCreateViewModel)).run {
+            if (customKey.isNotEmpty()) {
+                this.get(customKey, this@inject)
+            } else {
+                get(this@inject)
+            }
+        }
 
-private fun <T : ViewModel> createViewModel(model: T) = object : ViewModelProvider.Factory {
+private fun <T : ViewModel> createViewModel(onCreateViewModel: () -> T) = object : ViewModelProvider.Factory {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-            model as T
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (ViewModel::class.java.isAssignableFrom(modelClass)) {
+            try {
+                return onCreateViewModel() as T
+            } catch (e: Exception) {
+                when (e) {
+                    is NoSuchMethodException, is IllegalAccessException, is InstantiationException ->
+                        throw RuntimeException("Cannot create an instance of $modelClass", e)
+                }
+            }
+        }
+
+        throw RuntimeException("Cannot create an instance of $modelClass")
+    }
 }

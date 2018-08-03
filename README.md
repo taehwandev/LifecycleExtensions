@@ -9,9 +9,9 @@ I used kotlin infix notation for the following code.
 ```
 ViewModelProviders.of(this, object : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>?): T {
-        return SearchViewModel(..., ..., ...) as T
+        return YourViewModelClass(..., ..., ...) as T
     }
-}).get(ViewModel::class.java)
+}).get(YourViewModelClass::class.java)
 ```
 
 
@@ -22,8 +22,17 @@ It can be used via jcenter(), as follows
 [ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions/images/download.svg) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions/_latestVersion)
 
 ```
+implementation "androidx.appcompat:appcompat:$androidxSupportLibraryVersion"
+implementation "androidx.lifecycle:lifecycle-extensions:$androidxLifecycle"
+
 compile 'android.arch.lifecycle:extensions:1.0.0-alpha5'
+
 compile 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:1.0.0-alpha3
+
+implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.60'
+implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
+implementation 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:2.0.0-beta01'
 ```
 
 
@@ -32,66 +41,107 @@ compile 'tech.thdev.lifecycle.extensions:android-lifecycle-extensions:1.0.0-alph
 한글 Post - [Android Architecture Components ViewModel을 간단하게 초기화 하려면?](http://thdev.tech/androiddev/2017/07/25/Android-Architecture-Components-ViewModel-Inject.html)
 
 
+
 ## Use api
 
-### Use with kotlin - Activity
+### How to use with kotlin - Activity
 
 ```kotlin
-import android.arch.lifecycle.LifecycleActivity
-
-class MainActivity : LifecycleActivity() {
+class MainActivity : AppCompatActivity() {
     // ...
-    val viewModel = ViewModel(...).inject(this)
+    val yourViewModel = YourViewModel::class.java.inject(this /* @option , customKey = "custom key" */) {
+        // create Your ViewModel
+        YourViewModel(..., ..., ...).apply {
+            // Maybe init view model
+        }
+    }
     // ...
 }
 ```
 
-### Use with kotlin - Fragment
+### How to use with kotlin - Fragment
 
 ```kotlin
-import android.arch.lifecycle.LifecycleFragment
+class MainFragment : Fragment() {
 
-class MainActivity : Fragment() {
-    // ...
-    val viewModel = ViewModel(...).inject(this)
-    // ...
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val viewModel = YourViewModel::class.java.inject(this /* @option , customKey = "custom key" */) {
+            // create Your ViewModel
+            YourViewModel().apply {
+                // Maybe init view model
+            }
+        }
+    }
+}
+
+// or Use Activity inject.
+class MainFragment : Fragment() {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val viewModel = MainViewModel::class.java.inject(requireActivity() /* @option , customKey = "custom key" */) {
+            // create Your ViewModel
+            MainViewModel(..., ..., ...).apply {
+                // Maybe init view model
+            }
+        }
+    }
 }
 ```
 
-### Use with java - Activity
+### How to use with java - Activity
 
 ```java
-public class Sample extends LifecycleActivity {
+public class MainActivity extends AppCompatActivity {
 
-    // ...
-    ViewModel viewModel = ExtensionsKt.inject(new ViewModel(...), this);
-    // ...
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+        YourViewModel yourViewModel = Extensions.inject(YourViewModel.class, this /* @option , customKey = "custom key" */, new Function0<YourViewModel>() {
+            @Override
+            public YourViewModel invoke() {
+                return new YourViewModel();
+            }
+        });
+    }
 }
 ```
 
 ### Use with java - Fragment
 
 ```java
-public class Sample extends LifecycleFragment {
+public class MainFragment extends Fragment {
 
-    // ...
-    ViewModel viewModel = ExtensionsKt.inject(new ViewModel(...), this);
-    // ...
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        YourViewModel yourViewModel = Extensions.inject(YourViewModel.class, requireActivity() /* @option , customKey = "custom key" */, new Function0<YourViewModel>() {
+            @Override
+            public YourViewModel invoke() {
+                return new YourViewModel();
+            }
+        });
+    }
 }
 ```
 
 
 ## Use Library version
 
-- Kotlin version : 1.1.3-2
-- Android Architecture Components : 1.0.0-alpha5
-- support libraryVersion : 26.0.0-beta2
+- Kotlin version : 1.2.60
+- AndroidX Architecture Components : 2.0.0-beta01
+- AndroidX support libraryVersion : 1.0.0-beta01
 
 
 ## License
 
 ```
-Copyright 2017 Tae-hwan
+Copyright 2017-2018 Tae-hwan
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

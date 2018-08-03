@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Lifecycle Extensions</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_time">Time</string>
+    <string name="label_now_time">Now time</string>
+    <string name="label_past_time">Past time</string>
+</resources>
