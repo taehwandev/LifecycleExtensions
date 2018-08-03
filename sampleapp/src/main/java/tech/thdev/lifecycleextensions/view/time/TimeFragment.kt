@@ -12,14 +12,8 @@ import tech.thdev.lifecycleextensions.view.time.viewmodel.TimeViewModel
 
 class TimeFragment : Fragment() {
 
-    private val timeViewModel: TimeViewModel by requireActivity().lazyInject {
-        TimeViewModel().apply {
-            updateLoginTime = { time ->
-                if (!isDetached) {
-                    tv_past_time?.text = time
-                }
-            }
-        }
+    private val timeViewModel: TimeViewModel by lazyInject(isActivity = true) {
+        TimeViewModel()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -27,6 +21,12 @@ class TimeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        timeViewModel.updateLoginTime = { time ->
+            if (!isDetached) {
+                tv_past_time?.text = time
+            }
+        }
 
         timeViewModel.startTime()
     }

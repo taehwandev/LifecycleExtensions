@@ -1,4 +1,5 @@
 @file:Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
+@file:JvmName("ViewModelExtensions")
 
 package tech.thdev.lifecycle.extensions
 
@@ -8,27 +9,40 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
-
 /**
  * Android lifecycle ViewModel Inject.
  */
-inline fun <reified VIEW_MODEL : ViewModel> Fragment.inject(customKey: String = "", noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
-        ViewModelProviders.of(this, createViewModel(onCreateViewModel)).run {
+inline fun <reified VIEW_MODEL : ViewModel> Fragment.inject(customKey: String = "",
+                                                            noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
+        VIEW_MODEL::class.java.inject(this, customKey, onCreateViewModel)
+
+/**
+ * JVM only method...
+ */
+@JvmOverloads
+fun <VIEW_MODEL : ViewModel> Class<VIEW_MODEL>.inject(fragment: Fragment, customKey: String = "", onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
+        ViewModelProviders.of(fragment, createViewModel(onCreateViewModel)).run {
             if (customKey.isNotEmpty()) {
-                this.get(customKey, VIEW_MODEL::class.java)
+                this.get(customKey, this@inject)
             } else {
-                this.get(VIEW_MODEL::class.java)
+                this.get(this@inject.getCustomKey(), this@inject)
             }
         }
 
-inline fun <reified VIEW_MODEL : ViewModel> FragmentActivity.inject(customKey: String = "", noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
-        ViewModelProviders.of(this, createViewModel(onCreateViewModel)).run {
+inline fun <reified VIEW_MODEL : ViewModel> FragmentActivity.inject(customKey: String = "",
+                                                                    noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
+        VIEW_MODEL::class.java.inject(this, customKey, onCreateViewModel)
+
+@JvmOverloads
+fun <VIEW_MODEL : ViewModel> Class<VIEW_MODEL>.inject(fragmentActivity: FragmentActivity, customKey: String = "", onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
+        ViewModelProviders.of(fragmentActivity, createViewModel(onCreateViewModel)).run {
             if (customKey.isNotEmpty()) {
-                this.get(customKey, VIEW_MODEL::class.java)
+                this.get(customKey, this@inject)
             } else {
-                get(VIEW_MODEL::class.java)
+                get(this@inject.getCustomKey(), this@inject)
             }
         }
+
 
 fun <VIEW_MODEL : ViewModel> createViewModel(onCreateViewModel: () -> VIEW_MODEL) = object : ViewModelProvider.Factory {
 

@@ -69,7 +69,7 @@ class MainFragment : Fragment() {
 // or Use Activity inject.
 class MainFragment : Fragment() {
 
-    private val yourViewModel: YourViewModel by requireActivity().lazyInject(/* @Option customKey = "custom key" */) {
+    private val yourViewModel: YourViewModel by lazyInject(isActivity = true /* @Option , customKey = "custom key" */) {
         // create Your ViewModel
         YourViewModel(..., ..., ...).apply {
             // Maybe init your lateinit?
@@ -79,7 +79,7 @@ class MainFragment : Fragment() {
 ```
 
 
-## Use api - by inject
+## Use api - by inject only kotlin.
 
 Used when initializing lateinit.
 
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // ...
-        yourViewModel = inject(/* @option customKey = "custom key" */) {
+        yourViewModel = inject(/* @Option customKey = "custom key" */) {
             // create Your ViewModel
             YourViewModel(..., ..., ...).apply {
                 // Maybe init view model
@@ -112,7 +112,7 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        yourViewModel = inject(/* @option customKey = "custom key" */) {
+        yourViewModel = inject(/* @Option customKey = "custom key" */) {
             // create Your ViewModel
             YourViewModel(..., ..., ...).apply {
                 // Maybe init view model
@@ -129,12 +129,77 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        yourViewModel = requireActivity().inject(/* @option customKey = "custom key" */) {
+        yourViewModel = requireActivity().inject(/* @Option customKey = "custom key" */) {
             // create Your ViewModel
             YourViewModel(..., ..., ...).apply {
                 // Maybe init view model
             }
         }
+    }
+}
+```
+
+## Use api - by inject only Java.
+
+Used when java
+
+### Activity - Java
+
+```java
+public class MainActivity extends AppCompatActivity {
+
+    private YourViewModel viewModel;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        viewModel = ViewModelExtensions.inject(YourViewModel.class, this /*, @Option "custom key" */, new Function0<YourViewModel>() {
+            @Override
+            public YourViewModel invoke() {
+                return new YourViewModel(..., ..., ...);
+            }
+        });
+    }
+}
+```
+
+### Fragment - Java
+
+```java
+public class Sample extends Fragment {
+
+    private YourViewModel viewModel;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        viewModel = ViewModelExtensions.inject(YourViewModel.class, this /*, @Option "custom key" */, new Function0<YourViewModel>() {
+            @Override
+            public YourViewModel invoke() {
+                return new YourViewModel(..., ..., ...);
+            }
+        });
+    }
+}
+
+
+// or Use Activity inject.
+public class Sample extends Fragment {
+
+    private YourViewModel viewModel;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        viewModel = ViewModelExtensions.inject(YourViewModel.class, requireActivity() /*, @Option "custom key" */, new Function0<YourViewModel>() {
+            @Override
+            public YourViewModel invoke() {
+                return new YourViewModel(..., ..., ...);
+            }
+        });
     }
 }
 ```
