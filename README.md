@@ -19,6 +19,8 @@ ViewModelProviders.of(this, object : ViewModelProvider.Factory {
 
 It can be used via jcenter(), as follows
 
+### AndroidX - New package
+
 [ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions/images/download.svg) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions/_latestVersion)
 
 ```
@@ -26,6 +28,18 @@ implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.60'
 implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
 implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
 implementation "tech.thdev.lifecycle:lifecycle-extensions:$latestVersion"
+```
+
+### Legacy package
+
+[ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions-legacy/images/download.svg?version=1.3.0) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions-legacy/1.3.0/link)
+
+```
+implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.60'
+implementation 'com.android.support:appcompat-v7:27.1.1'
+
+implementation 'android.arch.lifecycle:extensions:1.1.1'
+implementation 'tech.thdev.lifecycle:lifecycle-extensions-legacy:1.3.0'
 ```
 
 
