@@ -1,27 +1,41 @@
 @file:Suppress("UNCHECKED_CAST")
+@file:JvmName("Extensions")
 
 package tech.thdev.lifecycle.extensions
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 
 
 /**
- * Created by taehwankwon on 7/24/17.
- *
  * Android lifecycle ViewModel Inject.
  */
-fun <T : ViewModel> T.inject(fragment: Fragment): T =
-        ViewModelProviders.of(fragment, createViewModel(this)).get(this.javaClass)
+@JvmOverloads
+fun <T : ViewModel> Class<T>.inject(fragment: Fragment, customKey: String = "", onCreateViewModel: () -> T): T =
+        ViewModelProviders.of(fragment, createViewModel(onCreateViewModel)).run {
+            if (customKey.isNotEmpty()) {
+                this.get(customKey, this@inject)
+            } else {
+                this.get(this@inject)
+            }
+        }
 
-fun <T : ViewModel> T.inject(fragmentActivity: FragmentActivity): T =
-        ViewModelProviders.of(fragmentActivity, createViewModel(this)).get(this.javaClass)
+@JvmOverloads
+fun <T : ViewModel> Class<T>.inject(fragmentActivity: FragmentActivity, customKey: String = "", onCreateViewModel: () -> T): T =
+        ViewModelProviders.of(fragmentActivity, createViewModel(onCreateViewModel)).run {
+            if (customKey.isNotEmpty()) {
+                this.get(customKey, this@inject)
+            } else {
+                get(this@inject)
+            }
+        }
 
-private fun <T : ViewModel> createViewModel(model: T) = object : ViewModelProvider.Factory {
+private fun <T : ViewModel> createViewModel(onCreateViewModel: () -> T) = object : ViewModelProvider.Factory {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-            model as T
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return onCreateViewModel() as T
+    }
 }

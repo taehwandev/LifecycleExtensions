@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Lifecycle Extensions</string>
+    <string name="label_viewmodel_test">viewmodel test</string>
+    <string name="message_text">Now count %,d</string>
+</resources>

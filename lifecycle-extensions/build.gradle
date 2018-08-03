@@ -5,17 +5,17 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'maven-publish'
 
 ext {
-    libraryVersionCode = 4
-    libraryVersion = '1.1.0'
+    libraryVersionCode = 5
+    libraryVersion = '1.2.0'
     libraryDescription = 'Android Architecture Components ViewModel simple factory inject. by thdev.tech'
     releaseNote = 'CHANGELOG_LIFECYCLE_EXTENSIONS.md'
 }
 
 android {
-    compileSdkVersion 'android-P'
+    compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 14
         targetSdkVersion 27
         versionCode libraryVersionCode
         versionName libraryVersion
@@ -34,8 +34,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$androidxSupportLibraryVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$androidxLifecycle"
+
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

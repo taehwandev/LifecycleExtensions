@@ -1,5 +1,22 @@
 ## Change Log
 
+### Version 1.2.0 (2018-08-03)
+
+- New legacy branch
+    - Support library 27.1.1
+    - lifecycle 1.1.1
+- Change initialized in lifecycle extensions.
+
+    ```
+    MainViewModel::class.java.inject(this) {
+        // Your class inject.
+
+        MainViewModel().apply {
+            // ViewModel init
+        }
+    }
+    ```
+
 ### Version 1.1.0 (2018-06-05)
 
 - Update android new package. androidx
