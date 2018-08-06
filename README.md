@@ -32,7 +32,7 @@ implementation 'tech.thdev.lifecycle:lifecycle-extensions-legacy:1.3.0'
 
 ## Blog
 
-한글 Post - [Android Architecture Components ViewModel을 간단하게 초기화 하려면?](http://thdev.tech/androiddev/2017/07/25/Android-Architecture-Components-ViewModel-Inject.html)
+한글 Post - [Android Architecture Components ViewModel을 간단하게 초기화 하려면?](https://thdev.tech/androiddev/2018/08/05/Android-Architecture-Components-ViewModel-Inject/)
 
 
 
