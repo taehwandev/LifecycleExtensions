@@ -1,14 +1,39 @@
+/**
+ * Android lifecycle ViewModel Inject.
+ *
+ * Copyright 2017-2018 Tae-hwan
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package tech.thdev.lifecycle.extensions
 
 import android.arch.lifecycle.ViewModel
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 
-inline fun <reified VIEW_MODEL : ViewModel> FragmentActivity.lazyInject(
-        customKey: String = VIEW_MODEL::class.java.getCustomKey(),
-        noinline onCreateViewModel: () -> VIEW_MODEL): ActivityViewModelInject<VIEW_MODEL> =
-        ActivityViewModelInject(this, customKey, onCreateViewModel)
-
+/**
+ * Fragment lazy inject viewModel
+ *
+ * ex) only fragment
+ * val viewModel by lazy {
+ *      MyViewModel()
+ * }
+ *
+ * ex) Create activity ViewModel from Fragment
+ * val viewModel by lazy(isActivity = true) {
+ *      MyViewModel()
+ * }
+ */
 inline fun <reified VIEW_MODEL : ViewModel> Fragment.lazyInject(
         isActivity: Boolean = false,
         customKey: String = VIEW_MODEL::class.java.getCustomKey(),
@@ -43,6 +68,19 @@ class FragmentViewModelInject<VIEW_MODEL : ViewModel>(private val isActivity: Bo
 
     override fun isInitialized(): Boolean = _value != null
 }
+
+/**
+ * FragmentActivity lazy inject viewModel
+ *
+ * ex)
+ * val viewModel by lazy {
+ *      MyViewModel()
+ * }
+ */
+inline fun <reified VIEW_MODEL : ViewModel> FragmentActivity.lazyInject(
+        customKey: String = VIEW_MODEL::class.java.getCustomKey(),
+        noinline onCreateViewModel: () -> VIEW_MODEL): ActivityViewModelInject<VIEW_MODEL> =
+        ActivityViewModelInject(this, customKey, onCreateViewModel)
 
 class ActivityViewModelInject<VIEW_MODEL : ViewModel>(private val activity: FragmentActivity,
                                                       private val customKey: String,

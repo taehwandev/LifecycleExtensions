@@ -1,5 +1,21 @@
+/**
+ * Android lifecycle ViewModel Inject.
+ *
+ * Copyright 2017-2018 Tae-hwan
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 @file:Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
-@file:JvmName("ViewModelExtensions")
 
 package tech.thdev.lifecycle.extensions
 
@@ -9,42 +25,35 @@ import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 
-
 /**
- * Android lifecycle ViewModel Inject.
+ * Create VIEW_MODEL from ViewModelProvider.
+ * @param VIEW_MODEL
+ * @param customKey
+ * @param cls
  */
+inline fun <VIEW_MODEL : ViewModel> ViewModelProvider.create(customKey: String, cls: Class<VIEW_MODEL>): VIEW_MODEL =
+        if (customKey.isNotEmpty()) {
+            get(customKey, cls)
+        } else {
+            get(cls.getCustomKey(), cls)
+        }
+
 inline fun <reified VIEW_MODEL : ViewModel> Fragment.inject(customKey: String = "",
                                                             noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
-        VIEW_MODEL::class.java.inject(this, customKey, onCreateViewModel)
+        ViewModelProviders.of(this, createViewModel(onCreateViewModel)).create(customKey, VIEW_MODEL::class.java)
+
 
 /**
- * JVM only method...
+ * FragmentActivity inject viewModel
  */
-@JvmOverloads
-fun <VIEW_MODEL : ViewModel> Class<VIEW_MODEL>.inject(fragment: Fragment, customKey: String = "", onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
-        ViewModelProviders.of(fragment, createViewModel(onCreateViewModel)).run {
-            if (customKey.isNotEmpty()) {
-                this.get(customKey, this@inject)
-            } else {
-                this.get(this@inject.getCustomKey(), this@inject)
-            }
-        }
-
 inline fun <reified VIEW_MODEL : ViewModel> FragmentActivity.inject(customKey: String = "",
                                                                     noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
-        VIEW_MODEL::class.java.inject(this, customKey, onCreateViewModel)
+        ViewModelProviders.of(this, createViewModel(onCreateViewModel)).create(customKey, VIEW_MODEL::class.java)
 
-@JvmOverloads
-fun <VIEW_MODEL : ViewModel> Class<VIEW_MODEL>.inject(fragmentActivity: FragmentActivity, customKey: String = "", onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
-        ViewModelProviders.of(fragmentActivity, createViewModel(onCreateViewModel)).run {
-            if (customKey.isNotEmpty()) {
-                this.get(customKey, this@inject)
-            } else {
-                get(this@inject.getCustomKey(), this@inject)
-            }
-        }
-
-
+/**
+ * ViewModel Factory function. create viewModel
+ * @param onCreateViewModel Higher-Order function.
+ */
 fun <VIEW_MODEL : ViewModel> createViewModel(onCreateViewModel: () -> VIEW_MODEL) = object : ViewModelProvider.Factory {
 
     override fun <VIEW_MODEL : ViewModel?> create(modelClass: Class<VIEW_MODEL>): VIEW_MODEL {

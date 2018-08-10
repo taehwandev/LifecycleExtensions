@@ -1,5 +1,22 @@
 ## Change Log
 
+### Version 1.4.0 (2018-08-10)
+
+- Split Java method.
+- Clarification of the java method
+
+  ex) only java method.
+
+  ```
+  viewModel = ViewModelExtensions.injectViewModel(this, MyViewModel.class, new ViewModelHelper<MyViewModel>() {
+      @NotNull
+      @Override
+      public MainViewModel onCreateViewModel() {
+          return new MyViewModel(..., ..., ...);
+      }
+  });
+  ```
+
 ### Version 1.3.0 (2018-08-04)
 
 - Add lazyInject
