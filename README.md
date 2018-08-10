@@ -26,6 +26,7 @@ It can be used jcenter(), as follows
 ```
 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.60'
 implementation 'androidx.appcompat:appcompat:1.0.0-rc01'
+
 implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-rc01'
 implementation "tech.thdev.lifecycle:lifecycle-extensions:$latestVersion"
 ```
@@ -42,6 +43,10 @@ implementation 'android.arch.lifecycle:extensions:1.1.1'
 implementation 'tech.thdev.lifecycle:lifecycle-extensions-legacy:1.4.1'
 ```
 
+## Diagram
+
+![](./images/AAC-ViewModel.png)
+
 
 ## Blog
 
@@ -53,7 +58,9 @@ implementation 'tech.thdev.lifecycle:lifecycle-extensions-legacy:1.4.1'
 
 Use lazy initialization
 
-### Activity - Kotlin
+### Activity inject
+
+Use cache activity
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
@@ -71,7 +78,9 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-### Fragment - Kotlin
+### Fragment inject
+
+Use cache fragment
 
 ```kotlin
 class MainFragment : Fragment() {
@@ -91,7 +100,9 @@ class MainFragment : Fragment() {
 }
 ```
 
-Or Activity inject.
+### Fragment - use activity inject
+
+Use cache activity
 
 ```kotlin
 class MainFragment : Fragment() {
@@ -116,9 +127,11 @@ class MainFragment : Fragment() {
 
 ## Use api - by inject only kotlin.
 
-Use initialize lateinit.
+Used initializing lateinit.
 
-### Activity - kotlin
+### Activity inject
+
+Use cache activity
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
@@ -137,7 +150,9 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-### Fragment - kotlin
+### Fragment inject
+
+Use cache fragment
 
 ```kotlin
 class MainFragment : Fragment() {
@@ -158,7 +173,9 @@ class MainFragment : Fragment() {
 }
 ```
 
-Or Activity inject.
+### Fragment - use activity inject
+
+Use cache activity
 
 ```kotlin
 class MainFragment : Fragment() {
@@ -183,7 +200,9 @@ class MainFragment : Fragment() {
 
 Use java
 
-### Activity - Java
+### Activity inject
+
+Use cache activity
 
 ```java
 public class MainActivity extends AppCompatActivity {
@@ -209,7 +228,9 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-### Fragment - Java
+### Fragment inject
+
+Use cache fragment
 
 ```java
 public class Sample extends Fragment {
@@ -236,7 +257,9 @@ public class Sample extends Fragment {
 ```
 
 
-Or Activity inject.
+### Fragment - use activity inject
+
+Use cache activity
 
 ```java
 public class Sample extends Fragment {
