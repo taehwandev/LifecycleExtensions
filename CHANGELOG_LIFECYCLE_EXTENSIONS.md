@@ -1,5 +1,23 @@
 ## Change Log
 
+### Version 2.2.0 (2018-08-10)
+
+- Split Java method.
+- Clarification of the java method
+
+  ex) only java method.
+
+  ```
+  viewModel = ViewModelExtensions.inject(this, MyViewModel.class, new ViewModelHelper<MyViewModel>() {
+      @NotNull
+      @Override
+      public MainViewModel onCreateViewModel() {
+          return new MyViewModel(..., ..., ...);
+      }
+  });
+  ```
+
+
 ### Version 2.1.1 (2018-08-04)
 
 - Just version change.
