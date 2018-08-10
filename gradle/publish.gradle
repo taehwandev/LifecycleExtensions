@@ -49,7 +49,7 @@ publishing.publications {
          * illegal character, but is well used in artifactId names.
          */
         def baseVariantArtifactId = flavored ? variant.flavorName.replace('_', '-') : project.name
-        def variantArtifactId = "$baseVariantArtifactId"
+        def variantArtifactId = "$baseVariantArtifactId-legacy"
 
         /**
          * If the javadoc destinationDir wasn't changed per flavor, the libraryVariants would
