@@ -6,10 +6,10 @@ buildscript {
         // https://github.com/Kotlin/kotlinx.coroutines
         coroutines_version = '0.24.0'
 
-        androidxSupportLibraryVersion = '1.0.0-beta01'
+        androidxSupportLibraryVersion = '1.0.0-rc01'
         androidxConstraintVersion = '1.1.2'
-        meterialLibraryVersion = '1.0.0-beta01'
-        androidxLifecycle = '2.0.0-beta01'
+        meterialLibraryVersion = '1.0.0-rc01'
+        androidxLifecycle = '2.0.0-rc01'
 
         // Bintray setting info
         repositoryName = 'thdev.tech'
