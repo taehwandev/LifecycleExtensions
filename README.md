@@ -17,17 +17,22 @@ ViewModelProviders.of(this, object : ViewModelProvider.Factory {
 
 ## Library version
 
-It can be used via jcenter(), as follows
+It can be used jcenter(), as follows
 
-[ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions-legacy/images/download.svg?version=1.4.0) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions-legacy/1.4.0/link)
+[ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions-legacy/images/download.svg?version=1.4.1) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions-legacy/1.4.1/link)
 
 ```
 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.60'
 implementation 'com.android.support:appcompat-v7:27.1.1'
 
 implementation 'android.arch.lifecycle:extensions:1.1.1'
-implementation 'tech.thdev.lifecycle:lifecycle-extensions-legacy:1.4.0'
+implementation 'tech.thdev.lifecycle:lifecycle-extensions-legacy:1.4.1'
 ```
+
+
+## Diagram
+
+![](./images/AAC-ViewModel.png)
 
 
 ## Blog
@@ -40,7 +45,9 @@ implementation 'tech.thdev.lifecycle:lifecycle-extensions-legacy:1.4.0'
 
 Use lazy initialization
 
-### Activity - Kotlin
+### Activity inject
+
+Use cache activity
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
@@ -58,7 +65,9 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-### Fragment - Kotlin
+### Fragment inject
+
+Use cache fragment
 
 ```kotlin
 class MainFragment : Fragment() {
@@ -76,8 +85,13 @@ class MainFragment : Fragment() {
         myViewModel ...
     }
 }
+```
 
-// or Use Activity inject.
+### Fragment - use activity inject
+
+Use cache activity
+
+```kotlin
 class MainFragment : Fragment() {
 
     private val myViewModel: MyViewModel
@@ -100,7 +114,9 @@ class MainFragment : Fragment() {
 
 Used initializing lateinit.
 
-### Activity - kotlin
+### Activity inject
+
+Use cache activity
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
@@ -119,7 +135,9 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-### Fragment - kotlin
+### Fragment inject
+
+Use cache fragment
 
 ```kotlin
 class MainFragment : Fragment() {
@@ -137,8 +155,13 @@ class MainFragment : Fragment() {
         }
     }
 }
+```
 
-// or Use Activity inject.
+### Fragment - use activity inject
+
+Use cache activity
+
+```kotlin
 class MainFragment : Fragment() {
 
     private lateinit var myViewModel: MyViewModel
@@ -159,9 +182,11 @@ class MainFragment : Fragment() {
 
 ## Use api - by inject only Java.
 
-Used java
+Use java
 
-### Activity - Java
+### Activity inject
+
+Use cache activity
 
 ```java
 public class MainActivity extends AppCompatActivity {
@@ -172,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        myViewModel = ViewModelExtensions.injectViewModel(
+        myViewModel = ViewModelExtensions.inject(
                 this,
                 MyViewModel.class /*, @Option "custom key" */,
                 new ViewModelHelper<MyViewModel>() {
@@ -187,7 +212,9 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-### Fragment - Java
+### Fragment inject
+
+Use cache fragment
 
 ```java
 public class Sample extends Fragment {
@@ -198,7 +225,7 @@ public class Sample extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        myViewModel = ViewModelExtensions.injectViewModel(
+        myViewModel = ViewModelExtensions.inject(
                 this,
                 MyViewModel.class /*, @Option "custom key" */,
                 new ViewModelHelper<MyViewModel>() {
@@ -211,9 +238,13 @@ public class Sample extends Fragment {
         });
     }
 }
+```
 
+### Fragment - use activity inject
 
-// or Use Activity inject.
+Use cache activity
+
+```java
 public class Sample extends Fragment {
 
     private MyViewModel myViewModel;

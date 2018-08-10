@@ -28,7 +28,7 @@ public class SampleJava extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewModel = ViewModelExtensions.injectViewModel(
+        viewModel = ViewModelExtensions.inject(
                 this,
                 MainViewModel.class,
                 new ViewModelHelper<MainViewModel>() {

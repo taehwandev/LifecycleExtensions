@@ -39,7 +39,7 @@ interface ViewModelHelper<VIEW_MODEL : ViewModel> {
  * @param viewModelHelper : new ViewModelHelper<>
  */
 @JvmOverloads
-fun <VIEW_MODEL : ViewModel> Fragment.injectViewModel(viewModel: Class<VIEW_MODEL>,
+fun <VIEW_MODEL : ViewModel> Fragment.inject(viewModel: Class<VIEW_MODEL>,
                                              customKey: String = "",
                                              viewModelHelper: ViewModelHelper<VIEW_MODEL>): VIEW_MODEL =
         ViewModelProviders.of(this, createViewModel(viewModelHelper::onCreateViewModel)).create(customKey, viewModel)
@@ -52,7 +52,7 @@ fun <VIEW_MODEL : ViewModel> Fragment.injectViewModel(viewModel: Class<VIEW_MODE
  * @param viewModelHelper : new ViewModelHelper<>
  */
 @JvmOverloads
-fun <VIEW_MODEL : ViewModel> FragmentActivity.injectViewModel(viewModel: Class<VIEW_MODEL>,
+fun <VIEW_MODEL : ViewModel> FragmentActivity.inject(viewModel: Class<VIEW_MODEL>,
                                              customKey: String = "",
                                              viewModelHelper: ViewModelHelper<VIEW_MODEL>): VIEW_MODEL =
         ViewModelProviders.of(this, createViewModel(viewModelHelper::onCreateViewModel)).create(customKey, viewModel)

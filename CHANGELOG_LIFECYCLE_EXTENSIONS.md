@@ -1,5 +1,21 @@
 ## Change Log
 
+### Version 1.4.1 (2018-08-10)
+
+- Java api name change. injectViewModel -> inject
+
+  ex) only java method.
+
+  ```
+  viewModel = ViewModelExtensions.inject(this, MyViewModel.class, new ViewModelHelper<MyViewModel>() {
+      @NotNull
+      @Override
+      public MainViewModel onCreateViewModel() {
+          return new MyViewModel(..., ..., ...);
+      }
+  });
+  ```
+
 ### Version 1.4.0 (2018-08-10)
 
 - Split Java method.
