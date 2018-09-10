@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home.*
-import tech.thdev.lifecycle.extensions.inject
+import tech.thdev.lifecycle.extensions.viewmodel.inject
 import tech.thdev.lifecycleextensions.R
 import tech.thdev.lifecycleextensions.view.home.viewmodel.HomeViewModel
 

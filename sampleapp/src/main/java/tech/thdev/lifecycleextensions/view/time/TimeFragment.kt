@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_time.*
-import tech.thdev.lifecycle.extensions.lazyInject
+import tech.thdev.lifecycle.extensions.viewmodel.lazyInject
 import tech.thdev.lifecycleextensions.R
 import tech.thdev.lifecycleextensions.view.time.viewmodel.TimeViewModel
 

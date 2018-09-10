@@ -1,5 +1,23 @@
 ## Change Log
 
+### Version 2.3.0 (2018-09-10)
+    - Add new api : LifecycleObserver simple inject
+
+    ex) only java sample
+
+    ```
+    mainObserver = LifecycleObserverExtensions.inject(this, new LifecycleObserverCreate<MainObserver>() {
+        @NotNull
+        @Override
+        public MainObserver onCreateLifecycleObserver() {
+            return new MainObserver();
+        }
+    });
+    ```
+
+    - Java create interface change : ViewModelHelper<> -> ViewModelCreate<>
+
+
 ### Version 2.2.0 (2018-08-10)
 
 - Split Java method.
