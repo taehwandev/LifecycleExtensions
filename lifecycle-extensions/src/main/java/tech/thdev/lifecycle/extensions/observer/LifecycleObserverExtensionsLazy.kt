@@ -35,7 +35,7 @@ import android.support.v4.app.FragmentActivity
  *      MyLifecycleObserver()
  * }
  */
-inline fun <reified OBSERVER : LifecycleObserver> Fragment.lazyInject(
+inline fun <reified OBSERVER : LifecycleObserver> Fragment.injectAutoLifecycle(
         isActivity: Boolean = false,
         noinline onCreateLifecycleObserver: () -> OBSERVER): FragmentViewModelInject<OBSERVER> =
         FragmentViewModelInject(isActivity, this, onCreateLifecycleObserver)
@@ -51,11 +51,11 @@ class FragmentViewModelInject<OBSERVER : LifecycleObserver>(private val isActivi
         get() {
             if (_value == null) {
                 _value = if (isActivity) {
-                    fragment.requireActivity().inject {
+                    fragment.requireActivity().injectLifecycle {
                         initializer!!()
                     }
                 } else {
-                    fragment.inject {
+                    fragment.injectLifecycle {
                         initializer!!()
                     }
                 }
@@ -76,7 +76,7 @@ class FragmentViewModelInject<OBSERVER : LifecycleObserver>(private val isActivi
  *      MyLifecycleObserver()
  * }
  */
-inline fun <reified OBSERVER : LifecycleObserver> FragmentActivity.lazyInject(
+inline fun <reified OBSERVER : LifecycleObserver> FragmentActivity.injectAutoLifecycle(
         noinline onCreateLifecycleObserver: () -> OBSERVER): ActivityViewModelInject<OBSERVER> =
         ActivityViewModelInject(this, onCreateLifecycleObserver)
 
@@ -88,7 +88,7 @@ class ActivityViewModelInject<OBSERVER : LifecycleObserver>(private val activity
     override val value: OBSERVER
         get() {
             if (_value == null) {
-                _value = activity.inject {
+                _value = activity.injectLifecycle {
                     initializer!!()
                 }
                 initializer = null

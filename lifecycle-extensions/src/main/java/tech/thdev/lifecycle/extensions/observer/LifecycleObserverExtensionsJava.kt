@@ -34,15 +34,17 @@ interface LifecycleObserverCreate<OBSERVER : LifecycleObserver> {
 /**
  * Create OBSERVER from Fragment.
  */
-fun <OBSERVER : LifecycleObserver> Fragment.inject(onCreateLifecycleObserver: LifecycleObserverCreate<OBSERVER>): OBSERVER =
+fun <OBSERVER : LifecycleObserver> injectLifecycle(fragment: Fragment,
+                                                   onCreateLifecycleObserver: LifecycleObserverCreate<OBSERVER>): OBSERVER =
         onCreateLifecycleObserver.onCreateLifecycleObserver().also {
-            this.lifecycle.addObserver(it)
+            fragment.lifecycle.addObserver(it)
         }
 
 /**
  * Create OBSERVER from FragmentActivity.
  */
-fun <OBSERVER : LifecycleObserver> FragmentActivity.inject(onCreateLifecycleObserver: LifecycleObserverCreate<OBSERVER>): OBSERVER =
+fun <OBSERVER : LifecycleObserver> injectLifecycle(activity: FragmentActivity,
+                                                   onCreateLifecycleObserver: LifecycleObserverCreate<OBSERVER>): OBSERVER =
         onCreateLifecycleObserver.onCreateLifecycleObserver().also {
-            this.lifecycle.addObserver(it)
+            activity.lifecycle.addObserver(it)
         }

@@ -25,7 +25,7 @@ import android.support.v4.app.FragmentActivity
 /**
  * Create OBSERVER from Fragment.
  */
-inline fun <reified OBSERVER : LifecycleObserver> Fragment.inject(noinline onCreateLifecycleObserver: () -> OBSERVER): OBSERVER =
+inline fun <reified OBSERVER : LifecycleObserver> Fragment.injectLifecycle(noinline onCreateLifecycleObserver: () -> OBSERVER): OBSERVER =
         onCreateLifecycleObserver().also {
             this.lifecycle.addObserver(it)
         }
@@ -33,7 +33,7 @@ inline fun <reified OBSERVER : LifecycleObserver> Fragment.inject(noinline onCre
 /**
  * Create OBSERVER from FragmentActivity.
  */
-inline fun <reified OBSERVER : LifecycleObserver> FragmentActivity.inject(noinline onCreateLifecycleObserver: () -> OBSERVER): OBSERVER =
+inline fun <reified OBSERVER : LifecycleObserver> FragmentActivity.injectLifecycle(noinline onCreateLifecycleObserver: () -> OBSERVER): OBSERVER =
         onCreateLifecycleObserver().also {
             this.lifecycle.addObserver(it)
         }

@@ -1,5 +1,10 @@
 ## Change Log
 
+### Version 1.5.1 (2018-09-10)
+    - api name change.
+        - AAC-ViewModel : lazy -> lazyViewModel, inject -> injectViewModel
+        - AAC-LifecycleObserver : injectAutoLifecycle, injectLifecycle
+
 ### Version 1.5.0 (2018-09-10)
     - Add new api : LifecycleObserver simple inject
 

@@ -3,13 +3,13 @@ package tech.thdev.lifecycleextensions
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import tech.thdev.lifecycle.extensions.viewmodel.inject
-import tech.thdev.lifecycle.extensions.viewmodel.lazyInject
+import tech.thdev.lifecycle.extensions.viewmodel.injectViewModel
+import tech.thdev.lifecycle.extensions.viewmodel.lazyInjectViewModel
 import tech.thdev.lifecycleextensions.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val lazyViewModel: MainViewModel by lazyInject {
+    private val lazyViewModel: MainViewModel by lazyInjectViewModel {
         MainViewModel()
     }
 
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         /**
          * ViewModel use.
          */
-        mainViewModel = inject {
+        mainViewModel = injectViewModel {
             MainViewModel().apply {
                 updateButton = { count ->
                     tv_message.text = getString(R.string.message_text, count)
