@@ -19,14 +19,14 @@
 @file:JvmName("ViewModelExtensions")
 @file:JvmMultifileClass
 
-package tech.thdev.lifecycle.extensions
+package tech.thdev.lifecycle.extensions.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 
-interface ViewModelHelper<VIEW_MODEL : ViewModel> {
+interface ViewModelCreate<VIEW_MODEL : ViewModel> {
 
     fun onCreateViewModel(): VIEW_MODEL
 }
@@ -39,10 +39,11 @@ interface ViewModelHelper<VIEW_MODEL : ViewModel> {
  * @param viewModelHelper : new ViewModelHelper<>
  */
 @JvmOverloads
-fun <VIEW_MODEL : ViewModel> Fragment.inject(viewModel: Class<VIEW_MODEL>,
-                                             customKey: String = "",
-                                             viewModelHelper: ViewModelHelper<VIEW_MODEL>): VIEW_MODEL =
-        ViewModelProviders.of(this, createViewModel(viewModelHelper::onCreateViewModel)).create(customKey, viewModel)
+fun <VIEW_MODEL : ViewModel> inject(fragment: Fragment,
+                                    viewModel: Class<VIEW_MODEL>,
+                                    customKey: String = "",
+                                    viewModelHelper: ViewModelCreate<VIEW_MODEL>): VIEW_MODEL =
+        ViewModelProviders.of(fragment, createViewModel(viewModelHelper::onCreateViewModel)).create(customKey, viewModel)
 
 /**
  * Only Java method.
@@ -52,7 +53,7 @@ fun <VIEW_MODEL : ViewModel> Fragment.inject(viewModel: Class<VIEW_MODEL>,
  * @param viewModelHelper : new ViewModelHelper<>
  */
 @JvmOverloads
-fun <VIEW_MODEL : ViewModel> FragmentActivity.inject(viewModel: Class<VIEW_MODEL>,
-                                             customKey: String = "",
-                                             viewModelHelper: ViewModelHelper<VIEW_MODEL>): VIEW_MODEL =
-        ViewModelProviders.of(this, createViewModel(viewModelHelper::onCreateViewModel)).create(customKey, viewModel)
+fun <VIEW_MODEL : ViewModel> inject(activity: FragmentActivity, viewModel: Class<VIEW_MODEL>,
+                                    customKey: String = "",
+                                    viewModelHelper: ViewModelCreate<VIEW_MODEL>): VIEW_MODEL =
+        ViewModelProviders.of(activity, createViewModel(viewModelHelper::onCreateViewModel)).create(customKey, viewModel)

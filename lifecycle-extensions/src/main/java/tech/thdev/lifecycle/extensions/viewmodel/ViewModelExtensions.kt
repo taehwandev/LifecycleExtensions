@@ -17,7 +17,7 @@
  */
 @file:Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
 
-package tech.thdev.lifecycle.extensions
+package tech.thdev.lifecycle.extensions.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider

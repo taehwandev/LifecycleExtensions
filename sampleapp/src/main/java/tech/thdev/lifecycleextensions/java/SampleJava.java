@@ -11,14 +11,18 @@ import org.jetbrains.annotations.NotNull;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
-import tech.thdev.lifecycle.extensions.ViewModelExtensions;
-import tech.thdev.lifecycle.extensions.ViewModelHelper;
+import tech.thdev.lifecycle.extensions.observer.LifecycleObserverCreate;
+import tech.thdev.lifecycle.extensions.observer.LifecycleObserverExtensions;
+import tech.thdev.lifecycle.extensions.viewmodel.ViewModelCreate;
+import tech.thdev.lifecycle.extensions.viewmodel.ViewModelExtensions;
 import tech.thdev.lifecycleextensions.R;
+import tech.thdev.lifecycleextensions.observer.MainObserver;
 import tech.thdev.lifecycleextensions.viewmodel.MainViewModel;
 
 public class SampleJava extends AppCompatActivity {
 
     private MainViewModel viewModel;
+    private MainObserver mainObserver;
 
     private TextView tvMessage;
     private Button btnTest;
@@ -31,7 +35,7 @@ public class SampleJava extends AppCompatActivity {
         viewModel = ViewModelExtensions.inject(
                 this,
                 MainViewModel.class,
-                new ViewModelHelper<MainViewModel>() {
+                new ViewModelCreate<MainViewModel>() {
                     @NotNull
                     @Override
                     public MainViewModel onCreateViewModel() {
@@ -44,6 +48,14 @@ public class SampleJava extends AppCompatActivity {
             public Unit invoke(Integer integer) {
                 tvMessage.setText("" + integer);
                 return null;
+            }
+        });
+
+        mainObserver = LifecycleObserverExtensions.inject(this, new LifecycleObserverCreate<MainObserver>() {
+            @NotNull
+            @Override
+            public MainObserver onCreateLifecycleObserver() {
+                return new MainObserver();
             }
         });
 

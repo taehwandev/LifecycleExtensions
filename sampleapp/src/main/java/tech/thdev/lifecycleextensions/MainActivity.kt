@@ -3,8 +3,8 @@ package tech.thdev.lifecycleextensions
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import tech.thdev.lifecycle.extensions.inject
-import tech.thdev.lifecycle.extensions.lazyInject
+import tech.thdev.lifecycle.extensions.viewmodel.inject
+import tech.thdev.lifecycle.extensions.viewmodel.lazyInject
 import tech.thdev.lifecycleextensions.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {

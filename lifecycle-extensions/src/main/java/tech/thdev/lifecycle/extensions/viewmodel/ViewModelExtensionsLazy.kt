@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tech.thdev.lifecycle.extensions
+package tech.thdev.lifecycle.extensions.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.support.v4.app.Fragment
@@ -25,12 +25,12 @@ import android.support.v4.app.FragmentActivity
  * Fragment lazy inject viewModel
  *
  * ex) only fragment
- * val viewModel by lazy {
+ * val viewModel by lazyInject {
  *      MyViewModel()
  * }
  *
  * ex) Create activity ViewModel from Fragment
- * val viewModel by lazy(isActivity = true) {
+ * val viewModel by lazyInject(isActivity = true) {
  *      MyViewModel()
  * }
  */
@@ -73,7 +73,7 @@ class FragmentViewModelInject<VIEW_MODEL : ViewModel>(private val isActivity: Bo
  * FragmentActivity lazy inject viewModel
  *
  * ex)
- * val viewModel by lazy {
+ * val viewModel by lazyInject {
  *      MyViewModel()
  * }
  */
