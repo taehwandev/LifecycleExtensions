@@ -26,7 +26,7 @@ public class JavaMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        homeViewModel = ViewModelExtensions.inject(this, HomeViewModel.class, new ViewModelCreate<HomeViewModel>() {
+        homeViewModel = ViewModelExtensions.injectViewModel(this, HomeViewModel.class, new ViewModelCreate<HomeViewModel>() {
             @NotNull
             @Override
             public HomeViewModel onCreateViewModel() {
@@ -42,7 +42,7 @@ public class JavaMainActivity extends AppCompatActivity {
             }
         });
 
-        mainLifecycleObserver = LifecycleObserverExtensions.inject(this, new LifecycleObserverCreate<MainLifecycleObserver>() {
+        mainLifecycleObserver = LifecycleObserverExtensions.injectLifecycle(this, new LifecycleObserverCreate<MainLifecycleObserver>() {
             @NotNull
             @Override
             public MainLifecycleObserver onCreateLifecycleObserver() {

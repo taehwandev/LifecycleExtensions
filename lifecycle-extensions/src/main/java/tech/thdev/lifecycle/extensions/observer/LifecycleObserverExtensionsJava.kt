@@ -34,7 +34,7 @@ interface LifecycleObserverCreate<OBSERVER : LifecycleObserver> {
 /**
  * Create OBSERVER from Fragment.
  */
-fun <OBSERVER : LifecycleObserver> inject(fragment: Fragment,
+fun <OBSERVER : LifecycleObserver> injectLifecycle(fragment: Fragment,
                                           onCreateLifecycleObserver: LifecycleObserverCreate<OBSERVER>): OBSERVER =
         onCreateLifecycleObserver.onCreateLifecycleObserver().also {
             fragment.lifecycle.addObserver(it)
@@ -43,7 +43,7 @@ fun <OBSERVER : LifecycleObserver> inject(fragment: Fragment,
 /**
  * Create OBSERVER from FragmentActivity.
  */
-fun <OBSERVER : LifecycleObserver> inject(activity: FragmentActivity,
+fun <OBSERVER : LifecycleObserver> injectLifecycle(activity: FragmentActivity,
                                           onCreateLifecycleObserver: LifecycleObserverCreate<OBSERVER>): OBSERVER =
         onCreateLifecycleObserver.onCreateLifecycleObserver().also {
             activity.lifecycle.addObserver(it)

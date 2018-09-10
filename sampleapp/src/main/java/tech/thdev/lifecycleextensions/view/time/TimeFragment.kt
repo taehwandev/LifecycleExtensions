@@ -6,14 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_time.*
-import tech.thdev.lifecycle.extensions.viewmodel.lazyInject
+import tech.thdev.lifecycle.extensions.observer.injectAutoLifecycle
+import tech.thdev.lifecycle.extensions.viewmodel.lazyInjectViewModel
 import tech.thdev.lifecycleextensions.R
+import tech.thdev.lifecycleextensions.observer.MainLifecycleObserver
 import tech.thdev.lifecycleextensions.view.time.viewmodel.TimeViewModel
 
 class TimeFragment : Fragment() {
 
-    private val timeViewModel: TimeViewModel by lazyInject(isActivity = true) {
+    private val timeViewModel: TimeViewModel by lazyInjectViewModel(isActivity = true) {
         TimeViewModel()
+    }
+
+    private val mainLifecycleObserver by injectAutoLifecycle {
+        MainLifecycleObserver()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =

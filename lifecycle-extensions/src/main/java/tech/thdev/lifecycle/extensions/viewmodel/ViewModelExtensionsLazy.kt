@@ -34,7 +34,7 @@ import androidx.lifecycle.ViewModel
  *      MyViewModel()
  * }
  */
-inline fun <reified VIEW_MODEL : ViewModel> Fragment.lazyInject(
+inline fun <reified VIEW_MODEL : ViewModel> Fragment.lazyInjectViewModel(
         isActivity: Boolean = false,
         customKey: String = VIEW_MODEL::class.java.getCustomKey(),
         noinline onCreateViewModel: () -> VIEW_MODEL): FragmentViewModelInject<VIEW_MODEL> =
@@ -52,11 +52,11 @@ class FragmentViewModelInject<VIEW_MODEL : ViewModel>(private val isActivity: Bo
         get() {
             if (_value == null) {
                 _value = if (isActivity) {
-                    fragment.requireActivity().inject(customKey) {
+                    fragment.requireActivity().injectViewModel(customKey) {
                         initializer!!()
                     }
                 } else {
-                    fragment.inject(customKey) {
+                    fragment.injectViewModel(customKey) {
                         initializer!!()
                     }
                 }
@@ -77,7 +77,7 @@ class FragmentViewModelInject<VIEW_MODEL : ViewModel>(private val isActivity: Bo
  *      MyViewModel()
  * }
  */
-inline fun <reified VIEW_MODEL : ViewModel> FragmentActivity.lazyInject(
+inline fun <reified VIEW_MODEL : ViewModel> FragmentActivity.lazyInjectViewModel(
         customKey: String = VIEW_MODEL::class.java.getCustomKey(),
         noinline onCreateViewModel: () -> VIEW_MODEL): ActivityViewModelInject<VIEW_MODEL> =
         ActivityViewModelInject(this, customKey, onCreateViewModel)
@@ -91,7 +91,7 @@ class ActivityViewModelInject<VIEW_MODEL : ViewModel>(private val activity: Frag
     override val value: VIEW_MODEL
         get() {
             if (_value == null) {
-                _value = activity.inject(customKey) {
+                _value = activity.injectViewModel(customKey) {
                     initializer!!()
                 }
                 initializer = null

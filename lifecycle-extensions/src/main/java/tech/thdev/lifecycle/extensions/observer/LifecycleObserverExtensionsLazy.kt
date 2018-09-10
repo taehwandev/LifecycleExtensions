@@ -19,22 +19,24 @@ package tech.thdev.lifecycle.extensions.observer
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 
 /**
  * Fragment lazy inject LifecycleObserver
  *
  * ex) only fragment
- * val lifecycleObserver by lazyInject {
+ * val lifecycleObserver by autoInjectLifecycle {
  *      MyLifecycleObserver()
  * }
  *
  * ex) Create activity lifecycleObserver from Fragment
- * val lifecycleObserver by lazyInject(isActivity = true) {
+ * val lifecycleObserver by autoInjectLifecycle(isActivity = true) {
  *      MyLifecycleObserver()
  * }
  */
-inline fun <reified OBSERVER : LifecycleObserver> Fragment.lazyInject(
+inline fun <reified OBSERVER : LifecycleObserver> Fragment.injectAutoLifecycle(
         isActivity: Boolean = false,
         noinline onCreateLifecycleObserver: () -> OBSERVER): FragmentViewModelInject<OBSERVER> =
         FragmentViewModelInject(isActivity, this, onCreateLifecycleObserver)
@@ -43,6 +45,23 @@ class FragmentViewModelInject<OBSERVER : LifecycleObserver>(private val isActivi
                                                             private val fragment: Fragment,
                                                             initializer: () -> OBSERVER) : Lazy<OBSERVER> {
 
+    init {
+        val observer = object : LifecycleObserver {
+
+            @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+            fun onCreate() {
+                // auto call and init...
+                value
+            }
+        }
+
+        if (isActivity) {
+            fragment.requireActivity().lifecycle.addObserver(observer)
+        } else {
+            fragment.lifecycle.addObserver(observer)
+        }
+    }
+
     private var initializer: (() -> LifecycleObserver)? = initializer
     private var _value: LifecycleObserver? = null
 
@@ -50,11 +69,11 @@ class FragmentViewModelInject<OBSERVER : LifecycleObserver>(private val isActivi
         get() {
             if (_value == null) {
                 _value = if (isActivity) {
-                    fragment.requireActivity().inject {
+                    fragment.requireActivity().injectLifecycle {
                         initializer!!()
                     }
                 } else {
-                    fragment.inject {
+                    fragment.injectLifecycle {
                         initializer!!()
                     }
                 }
@@ -71,11 +90,11 @@ class FragmentViewModelInject<OBSERVER : LifecycleObserver>(private val isActivi
  * FragmentActivity lazy inject LifecycleObserver
  *
  * ex)
- * val lifecycleObserver by lazy {
+ * val lifecycleObserver by autoInjectLifecycle {
  *      MyLifecycleObserver()
  * }
  */
-inline fun <reified OBSERVER : LifecycleObserver> FragmentActivity.lazyInject(
+inline fun <reified OBSERVER : LifecycleObserver> FragmentActivity.injectAutoLifecycle(
         noinline onCreateLifecycleObserver: () -> OBSERVER): ActivityViewModelInject<OBSERVER> =
         ActivityViewModelInject(this, onCreateLifecycleObserver)
 
@@ -84,10 +103,21 @@ class ActivityViewModelInject<OBSERVER : LifecycleObserver>(private val activity
     private var initializer: (() -> LifecycleObserver)? = initializer
     private var _value: LifecycleObserver? = null
 
+    init {
+        activity.lifecycle.addObserver(object : LifecycleObserver {
+
+            @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+            fun onCreate() {
+                // auto call and init...
+                value
+            }
+        })
+    }
+
     override val value: OBSERVER
         get() {
             if (_value == null) {
-                _value = activity.inject {
+                _value = activity.injectLifecycle {
                     initializer!!()
                 }
                 initializer = null
