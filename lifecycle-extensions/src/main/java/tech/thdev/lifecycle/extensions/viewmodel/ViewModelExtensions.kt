@@ -17,7 +17,7 @@
  */
 @file:Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
 
-package tech.thdev.lifecycle.extensions
+package tech.thdev.lifecycle.extensions.viewmodel
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -38,7 +38,7 @@ inline fun <VIEW_MODEL : ViewModel> ViewModelProvider.create(customKey: String, 
             get(cls.getCustomKey(), cls)
         }
 
-inline fun <reified VIEW_MODEL : ViewModel> Fragment.inject(customKey: String = "",
+inline fun <reified VIEW_MODEL : ViewModel> Fragment.injectViewModel(customKey: String = "",
                                                             noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
         ViewModelProviders.of(this, createViewModel(onCreateViewModel)).create(customKey, VIEW_MODEL::class.java)
 
@@ -46,7 +46,7 @@ inline fun <reified VIEW_MODEL : ViewModel> Fragment.inject(customKey: String = 
 /**
  * FragmentActivity inject viewModel
  */
-inline fun <reified VIEW_MODEL : ViewModel> FragmentActivity.inject(customKey: String = "",
+inline fun <reified VIEW_MODEL : ViewModel> FragmentActivity.injectViewModel(customKey: String = "",
                                                                     noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
         ViewModelProviders.of(this, createViewModel(onCreateViewModel)).create(customKey, VIEW_MODEL::class.java)
 
