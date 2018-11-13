@@ -19,7 +19,7 @@ ViewModelProviders.of(this, object : ViewModelProvider.Factory {
 
 It can be used jcenter(), as follows
 
-[ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions-legacy/images/download.svg?version=1.4.1) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions-legacy/1.4.1/link)
+[ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions-legacy/images/download.svg) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions-legacy/_latestVersion)
 
 ```
 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.0'
