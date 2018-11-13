@@ -1,15 +1,13 @@
 package tech.thdev.lifecycleextensions.view.time.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.cancelAndJoin
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.*
+import tech.thdev.coroutines.provider.DispatchersProvider
+import tech.thdev.support.base.coroutines.viewmodel.CoroutineScopeViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TimeViewModel : ViewModel() {
+class TimeViewModel : CoroutineScopeViewModel() {
 
     private val tag = this::class.java.simpleName
 
@@ -25,11 +23,9 @@ class TimeViewModel : ViewModel() {
         SimpleDateFormat("mm:ss.S", Locale.getDefault())
     }
 
-    private lateinit var timer: Job
-
     private fun updateTimeThread() = launch {
         while (isActive) {
-            launch(UI) {
+            launch(DispatchersProvider.main) {
                 if (::updateLoginTime.isInitialized) {
                     updateLoginTime(simpleDateFormat.format(System.currentTimeMillis() - prevTime))
                 }
@@ -40,14 +36,18 @@ class TimeViewModel : ViewModel() {
 
     fun startTime() {
         prevTime = System.currentTimeMillis()
-        timer = updateTimeThread()
+        updateTimeThread()
     }
 
     fun stopTime() {
         Log.e(tag, "stop")
         launch {
-            timer.cancelAndJoin()
+            job.cancelAndJoin()
         }
         Log.e(tag, "stop cancelAndJoin")
+    }
+
+    override fun onCleared() {
+        stopTime()
     }
 }

@@ -1,5 +1,9 @@
 ## Change Log
 
+### Version 2.4.0 (2018-11-13)
+- Update kotlin version(1.3.0)
+- Update build version(3.2.1)
+
 ### Version 2.3.0 (2018-09-10)
     - Add new api : LifecycleObserver simple inject
 
