@@ -1,5 +1,9 @@
 ## Change Log
 
+### Version 1.6.0 (2018-11-13)
+- Update kotlin version(1.3.0)
+- Update build version(3.2.1)
+
 ### Version 1.5.1 (2018-09-10)
     - api name change.
         - AAC-ViewModel : lazy -> lazyViewModel, inject -> injectViewModel

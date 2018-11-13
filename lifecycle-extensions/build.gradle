@@ -5,8 +5,8 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'maven-publish'
 
 ext {
-    libraryVersionCode = 10
-    libraryVersion = '1.5.1'
+    libraryVersionCode = 11
+    libraryVersion = '1.6.0'
     libraryDescription = 'Android Architecture Components Lifecycle simple factory inject. by thdev.tech'
     releaseNote = 'CHANGELOG_LIFECYCLE_EXTENSIONS.md'
 }
