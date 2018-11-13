@@ -83,6 +83,10 @@
     }
     ```
 
+### Version 1.1.1 (2018-06-07)
+
+- Support Android 28.(Android P)
+
 
 ### Version 1.1.0 (2018-06-05)
 
