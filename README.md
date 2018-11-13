@@ -24,10 +24,10 @@ It can be used jcenter(), as follows
 [ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions/images/download.svg) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions/_latestVersion)
 
 ```
-implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.60'
-implementation 'androidx.appcompat:appcompat:1.0.0-rc01'
+implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.0'
+implementation 'androidx.appcompat:appcompat:1.0.1'
 
-implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-rc01'
+implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 implementation "tech.thdev.lifecycle:lifecycle-extensions:$latestVersion"
 ```
 
@@ -36,11 +36,11 @@ implementation "tech.thdev.lifecycle:lifecycle-extensions:$latestVersion"
 [ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions-legacy/images/download.svg?version=1.5.1) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions-legacy/1.5.1/link)
 
 ```
-implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.60'
+implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.0'
 implementation 'com.android.support:appcompat-v7:27.1.1'
 
 implementation 'android.arch.lifecycle:extensions:1.1.1'
-implementation 'tech.thdev.lifecycle:lifecycle-extensions-legacy:1.5.1'
+implementation "tech.thdev.lifecycle:lifecycle-extensions-legacy:$latestLegacyVersion"
 ```
 
 ## Diagram
