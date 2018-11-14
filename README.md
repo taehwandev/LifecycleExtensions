@@ -24,8 +24,8 @@ It can be used jcenter(), as follows
 [ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions/images/download.svg) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions/_latestVersion)
 
 ```
-implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.0'
-implementation 'androidx.appcompat:appcompat:1.0.1'
+implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.10'
+implementation 'androidx.appcompat:appcompat:1.0.2'
 
 implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 implementation "tech.thdev.lifecycle:lifecycle-extensions:$latestVersion"
@@ -36,7 +36,7 @@ implementation "tech.thdev.lifecycle:lifecycle-extensions:$latestVersion"
 [ ![Download](https://api.bintray.com/packages/taehwandev/thdev.tech/lifecycle-extensions-legacy/images/download.svg) ](https://bintray.com/taehwandev/thdev.tech/lifecycle-extensions-legacy/_latestVersion)
 
 ```
-implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.0'
+implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.10'
 implementation 'com.android.support:appcompat-v7:27.1.1'
 
 implementation 'android.arch.lifecycle:extensions:1.1.1'
