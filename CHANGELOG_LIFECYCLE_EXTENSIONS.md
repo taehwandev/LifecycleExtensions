@@ -1,5 +1,8 @@
 ## Change Log
 
+### Version 2.4.1 (2018-11-14)
+- Update kotlin 1.3.10/coroutines 1.0.1
+
 ### Version 2.4.0 (2018-11-13)
 - Update kotlin version(1.3.0)
 - Update build version(3.2.1)
