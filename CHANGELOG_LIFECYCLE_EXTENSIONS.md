@@ -1,5 +1,8 @@
 ## Change Log
 
+### Version 1.6.2 (2019-01-09)
+- Fix Cannot create an instance of class android.arch.lifecycle.s tech.thdev.lifecycle.extensions.viewmodel.ViewModelExtensionsKt$createViewModel$1.create
+
 ### Version 1.6.1 (2018-11-14)
 - Update kotlin 1.3.10/coroutines 1.0.1
 

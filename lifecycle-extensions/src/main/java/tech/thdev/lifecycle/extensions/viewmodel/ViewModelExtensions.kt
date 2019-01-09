@@ -39,7 +39,7 @@ inline fun <VIEW_MODEL : ViewModel> ViewModelProvider.create(customKey: String, 
         }
 
 inline fun <reified VIEW_MODEL : ViewModel> Fragment.injectViewModel(customKey: String = "",
-                                                            noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
+                                                                     noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
         ViewModelProviders.of(this, createViewModel(onCreateViewModel)).create(customKey, VIEW_MODEL::class.java)
 
 
@@ -47,7 +47,7 @@ inline fun <reified VIEW_MODEL : ViewModel> Fragment.injectViewModel(customKey: 
  * FragmentActivity inject viewModel
  */
 inline fun <reified VIEW_MODEL : ViewModel> FragmentActivity.injectViewModel(customKey: String = "",
-                                                                    noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
+                                                                             noinline onCreateViewModel: () -> VIEW_MODEL): VIEW_MODEL =
         ViewModelProviders.of(this, createViewModel(onCreateViewModel)).create(customKey, VIEW_MODEL::class.java)
 
 /**
@@ -56,18 +56,7 @@ inline fun <reified VIEW_MODEL : ViewModel> FragmentActivity.injectViewModel(cus
  */
 fun <VIEW_MODEL : ViewModel> createViewModel(onCreateViewModel: () -> VIEW_MODEL) = object : ViewModelProvider.Factory {
 
-    override fun <VIEW_MODEL : ViewModel?> create(modelClass: Class<VIEW_MODEL>): VIEW_MODEL {
-        if (ViewModel::class.java.isAssignableFrom(modelClass)) {
-            try {
-                return onCreateViewModel() as VIEW_MODEL
-            } catch (e: Exception) {
-                when (e) {
-                    is NoSuchMethodException, is IllegalAccessException, is InstantiationException ->
-                        throw RuntimeException("Cannot create an instance of $modelClass", e)
-                }
-            }
-        }
-
-        throw RuntimeException("Cannot create an instance of $modelClass")
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return onCreateViewModel() as T
     }
 }
